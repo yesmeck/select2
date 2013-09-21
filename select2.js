@@ -1784,6 +1784,16 @@ the specific language governing permissions and limitations under the Apache Lic
           }
           this.opts.populateResults.call(this, this.results, items, { term: term, page: page, context: context });
         },
+
+        removeChoice: function(text) {
+          var self = this;
+          $.each(this.results.children(), function(index, result) {
+            var $result = $(result);
+            if ($result.data('select2-data')[self.opts.data.text] == text) {
+              result.remove();
+            }
+          });
+        }
     });
 
     SingleSelect2 = clazz(AbstractSelect2, {
@@ -3101,7 +3111,7 @@ the specific language governing permissions and limitations under the Apache Lic
             opts,
             select2,
             method, value, multiple,
-            allowedMethods = ["val", "destroy", "opened", "open", "close", "focus", "isFocused", "container", "dropdown", "onSortStart", "onSortEnd", "enable", "disable", "readonly", "positionDropdown", "data", "search", "addChoice"],
+            allowedMethods = ["val", "destroy", "opened", "open", "close", "focus", "isFocused", "container", "dropdown", "onSortStart", "onSortEnd", "enable", "disable", "readonly", "positionDropdown", "data", "search", "addChoice", "removeChoice"],
             valueMethods = ["opened", "isFocused", "container", "dropdown"],
             propertyMethods = ["val", "data"],
             methodsMap = { search: "externalSearch" };
