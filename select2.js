@@ -1772,7 +1772,18 @@ the specific language governing permissions and limitations under the Apache Lic
             if (width !== null) {
                 this.container.css("width", width);
             }
-        }
+        },
+
+        addChoice: function(items) {
+          var term = this.search.val(),
+              page = this.resultsPage + 1,
+              context = this.context;
+
+          if (!$.isArray(items)) {
+            items = [items];
+          }
+          this.opts.populateResults.call(this, this.results, items, { term: term, page: page, context: context });
+        },
     });
 
     SingleSelect2 = clazz(AbstractSelect2, {
@@ -3090,7 +3101,7 @@ the specific language governing permissions and limitations under the Apache Lic
             opts,
             select2,
             method, value, multiple,
-            allowedMethods = ["val", "destroy", "opened", "open", "close", "focus", "isFocused", "container", "dropdown", "onSortStart", "onSortEnd", "enable", "disable", "readonly", "positionDropdown", "data", "search"],
+            allowedMethods = ["val", "destroy", "opened", "open", "close", "focus", "isFocused", "container", "dropdown", "onSortStart", "onSortEnd", "enable", "disable", "readonly", "positionDropdown", "data", "search", "addChoice"],
             valueMethods = ["opened", "isFocused", "container", "dropdown"],
             propertyMethods = ["val", "data"],
             methodsMap = { search: "externalSearch" };
